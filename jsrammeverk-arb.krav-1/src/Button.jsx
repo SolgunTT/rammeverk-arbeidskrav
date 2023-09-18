@@ -1,13 +1,12 @@
-git branch
-git branch
-ct";
+import React from "react";
+import "./App.css"
 
-const Button = () => {
+const Button = ({ children }) => {
 
-return (
 
-    <button style={{backgroundColor: 'red'}}>
-    
-    </button>
-);
+    return (
+<button className="shared-button">{children}</button>
+)
 };
+
+export default Button;
