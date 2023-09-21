@@ -1,12 +1,17 @@
 import React from 'react';
 import './App.css';
-import StartButton from './StartButton';
+import HighscoreButton from './HighscoreButton';
+import StartComponent from './StartComponent';
 
 // const startBtn = "START";
 
 function App() {
   return (
-    <StartButton />
+    <div>
+    <StartComponent />
+    <hr></hr>
+    <HighscoreButton />
+    </div>
     
   )
 }
