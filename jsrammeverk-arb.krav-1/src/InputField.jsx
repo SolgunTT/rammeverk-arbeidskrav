@@ -1,15 +1,11 @@
 import React from "react";
 
-const InputField = () => {
-
-
-
-    return (
-        <div>
-        {/* <label>{children}</label> */}
-        <input type="text"></input>
-        </div>
-    )
-}
+const InputField = ({ value, onChange }) => {
+  return (
+    <div>
+      <input type="text" value={value} onChange={onChange} />
+    </div>
+  );
+};
 
 export default InputField;

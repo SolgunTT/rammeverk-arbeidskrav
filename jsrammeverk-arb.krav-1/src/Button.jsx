@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css"
 
-const Button = ({ children }) => {
+const Button = ({ onClick, label }) => {
 
 
     return (
-<button className="shared-button">{children}</button>
+<button onClick={onClick} className="shared-button">{label}</button>
 )
 };
 

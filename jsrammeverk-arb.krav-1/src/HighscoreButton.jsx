@@ -4,7 +4,9 @@ import "./App.css"
 
 const HighscoreButton = () => {
 
-return <Button>Se Highscore</Button>
+return (
+    <Button className="highscore-button" label="Se Highscore"></Button> 
+    )
 
 
 }

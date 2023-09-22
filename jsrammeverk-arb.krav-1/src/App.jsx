@@ -11,6 +11,7 @@ function App() {
     <StartComponent />
     <hr></hr>
     <HighscoreButton />
+    <hr></hr>
     </div>
     
   )

@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import StartButton from "./StartButton";
 import InputField from "./InputField";
+import GameComponent from "./GameComponent";
 
 const StartComponent = () => {
+  const [name, setName] = useState("");
+  const [displayedName, setDisplayedName] = useState("");
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
-    const regName = () => {
+  const handleInputChange = (event) => {
+    setName(event.target.value);
+  };
 
-        console.log("navn")
+  const handleButtonClick = () => {
+    setDisplayedName(name);
+    setName("");
+    setIsGameStarted(true);
+  };
 
-    }
-
-    return (
-
-        <div>
-        <InputField />
-        <StartButton  />
+  return (
+    <div>
+      {isGameStarted ? (
+        <GameComponent playerName={displayedName} />
+      ) : (
+        <div className="start-component">
+          <InputField value={name} onChange={handleInputChange} />
+          <StartButton onClick={handleButtonClick} />
+          <p>{displayedName}</p>
         </div>
-
-    )
-}
-
+      )}
+    </div>
+  );
+};
 
 export default StartComponent;
