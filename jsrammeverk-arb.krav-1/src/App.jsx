@@ -2,13 +2,15 @@ import React from 'react';
 import './App.css';
 import HighscoreButton from './HighscoreButton';
 import StartComponent from './StartComponent';
+import CountdownComponent from './CountdownComponent';
 
-// const startBtn = "START";
+
 
 function App() {
   return (
     <div>
     <StartComponent />
+    <CountdownComponent />
     <hr></hr>
     <HighscoreButton />
     <hr></hr>
