@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import InputField from "./InputField";
 
 const CountdownComponent = () => {
   const [countdown, setCountdown] = useState(2);
+  const [belowZero, setBelowZero] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
 
-      if (countdown === 0 ) {
+      if (countdown <= 0) {
         clearInterval(intervalId);
-        console.log("funker her,da")
-
+        setBelowZero(true);
       }
     }, 1000);
 
@@ -20,8 +21,15 @@ const CountdownComponent = () => {
   }, [countdown]);
 
   return (
-    <div>
-      <p>Countdown: {countdown}</p>
+    <div className="game-div">
+      {belowZero ? (
+        <p>Time's up!</p>
+      ) : (
+        <div className="game-div" >
+          <p>Countdown: {countdown}</p>
+          <InputField />
+        </div>
+      )}
     </div>
   );
 };

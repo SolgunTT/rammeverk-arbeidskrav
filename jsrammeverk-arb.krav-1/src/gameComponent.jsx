@@ -1,12 +1,15 @@
 import React from "react";
-import InputField from "./InputField";
+import CountdownComponent from "./CountdownComponent";
+import WordComponent from "./WordComponent";
 
 const GameComponent = ({ playerName }) => {
 
+
   return (
     <div>
-      <h1>Lykke til, {playerName}!</h1>
-<InputField></InputField>
+      <h1 className="good-luck" >Lykke til, {playerName}!</h1>
+<CountdownComponent />
+<WordComponent />
     </div>
   );
 };

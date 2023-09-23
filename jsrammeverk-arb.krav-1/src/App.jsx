@@ -6,11 +6,11 @@ import CountdownComponent from './CountdownComponent';
 
 
 
+
 function App() {
   return (
     <div>
     <StartComponent />
-    <CountdownComponent />
     <hr></hr>
     <HighscoreButton />
     <hr></hr>
