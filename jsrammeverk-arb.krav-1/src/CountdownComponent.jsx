@@ -27,7 +27,6 @@ const CountdownComponent = ( { userInput }) => {
       ) : (
         <div className="game-div" >
           <p>Countdown: {countdown}</p>
-          <InputField onChange={userInput} />
         </div>
       )}
     </div>
