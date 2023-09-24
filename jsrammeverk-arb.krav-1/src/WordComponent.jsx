@@ -2,7 +2,7 @@ import React from "react";
 import Høst from "./Høst.json";
 
 
-const WordComponent = () => {
+const WordComponent = ( ) => {
   return (
     <div>
       {Høst.ord.map((ord, index) => (

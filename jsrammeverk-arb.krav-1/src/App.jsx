@@ -2,10 +2,6 @@ import React from 'react';
 import './App.css';
 import HighscoreButton from './HighscoreButton';
 import StartComponent from './StartComponent';
-import CountdownComponent from './CountdownComponent';
-
-
-
 
 
 function App() {

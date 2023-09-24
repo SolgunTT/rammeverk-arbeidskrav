@@ -25,7 +25,8 @@ const StartComponent = () => {
       <GameComponent playerName={displayedName} />
       ) : (
         <div className="start-component">
-          <InputField value={name} onChange={handleInputChange} />
+      <InputField value={name} onChange={handleInputChange} />
+      
           <StartButton onClick={handleButtonClick} />
           <p>{displayedName}</p>
         </div>

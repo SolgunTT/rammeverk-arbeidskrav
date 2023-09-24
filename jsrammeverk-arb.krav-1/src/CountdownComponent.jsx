@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import InputField from "./InputField";
 
-const CountdownComponent = () => {
-  const [countdown, setCountdown] = useState(2);
+const CountdownComponent = ( { userInput }) => {
+  const [countdown, setCountdown] = useState(200);
   const [belowZero, setBelowZero] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const CountdownComponent = () => {
       ) : (
         <div className="game-div" >
           <p>Countdown: {countdown}</p>
-          <InputField />
+          <InputField onChange={userInput} />
         </div>
       )}
     </div>
