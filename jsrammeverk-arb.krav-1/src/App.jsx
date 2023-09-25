@@ -1,19 +1,13 @@
-import React from 'react';
-import './App.css';
-import HighscoreButton from './HighscoreButton';
-import StartComponent from './StartComponent';
-
+import React from "react";
+import "./App.css";
+import StartComponent from "./components/StartComponent";
 
 function App() {
   return (
     <div>
-    <StartComponent />
-    <hr></hr>
-    <HighscoreButton />
-    <hr></hr>
+      <StartComponent />
     </div>
-    
-  )
+  );
 }
 
 export default App;

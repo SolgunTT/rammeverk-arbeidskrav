@@ -1,6 +1,10 @@
+body {
+    background-color: rgb(204, 155, 129);
+}
+
 .highscore-button {
 
-    margin-top: 200vh;
+    margin-top: 2000vh;
     background-color: rgb(34, 245, 11);
 }
 
@@ -19,7 +23,6 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
 }
 
 
-
 .start-component {
 
     display: flex;
@@ -30,11 +33,16 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
 
 .good-luck {
 
-    margin-left: 5vw;
+width: 30vw;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 .game-div {
     width: 10vw;
     margin-left: auto;
     margin-right: auto;
+}
+
+.points {
+    font-size: 6vh;
 }

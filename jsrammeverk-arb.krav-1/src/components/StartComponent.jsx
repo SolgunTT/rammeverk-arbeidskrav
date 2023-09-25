@@ -3,7 +3,6 @@ import StartButton from "./StartButton";
 import InputField from "./InputField";
 import GameComponent from "./GameComponent";
 
-
 const StartComponent = () => {
   const [name, setName] = useState("");
   const [displayedName, setDisplayedName] = useState("");
@@ -22,11 +21,10 @@ const StartComponent = () => {
   return (
     <div>
       {isGameStarted ? (
-      <GameComponent playerName={displayedName} />
+        <GameComponent playerName={displayedName} />
       ) : (
         <div className="start-component">
-      <InputField value={name} onChange={handleInputChange} />
-      
+          <InputField value={name} onChange={handleInputChange} />
           <StartButton onClick={handleButtonClick} />
           <p>{displayedName}</p>
         </div>

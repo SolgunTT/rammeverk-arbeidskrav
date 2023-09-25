@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import InputField from "./InputField";
 
-const CountdownComponent = ( { userInput }) => {
-  const [countdown, setCountdown] = useState(200);
+
+const CountdownComponent = ({ userInput }) => {
+  const [countdown, setCountdown] = useState(120);
   const [belowZero, setBelowZero] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const CountdownComponent = ( { userInput }) => {
       {belowZero ? (
         <p>Time's up!</p>
       ) : (
-        <div className="game-div" >
+        <div className="game-div">
           <p>Countdown: {countdown}</p>
         </div>
       )}
