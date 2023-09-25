@@ -14,10 +14,12 @@ const GameComponent = ({ playerName }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
-        if (wordIndex < words.length - 1) {
+        e.preventDefault();
+        if (wordIndex < words.length) {
           setWordIndex(wordIndex + 1);
         }
         setInputValue("");
+        
       }
     };
 
@@ -26,7 +28,7 @@ const GameComponent = ({ playerName }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [wordIndex, words, matchCount]);
+  }, [wordIndex, words]);
 
   const handleInputChange = (e) => {
     const enteredChar = e.target.value;
