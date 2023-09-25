@@ -1,14 +1,7 @@
 import React from "react";
 
-const PointComponent = ( {matchCount}) => {
-
-
-return (
-
-<p className="points">{matchCount}</p>
-)
-
-
-}
+const PointComponent = ({ totalMatchCount }) => {
+  return <p className="points">{totalMatchCount}</p>;
+};
 
 export default PointComponent;

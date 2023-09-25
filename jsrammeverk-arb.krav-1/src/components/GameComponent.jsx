@@ -10,6 +10,7 @@ const GameComponent = ({ playerName }) => {
   const currentWord = words[wordIndex];
   const [inputValue, setInputValue] = useState("");
   const [matchCount, setMatchCount] = useState(0);
+  const [totalMatchCount, setTotalMatchCount] = useState(0);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -19,7 +20,6 @@ const GameComponent = ({ playerName }) => {
           setWordIndex(wordIndex + 1);
         }
         setInputValue("");
-        
       }
     };
 
@@ -31,12 +31,13 @@ const GameComponent = ({ playerName }) => {
   }, [wordIndex, words]);
 
   const handleInputChange = (e) => {
-    const enteredChar = e.target.value;
-    setInputValue(e.target.value);
+    const enteredText = e.target.value;
+    setInputValue(enteredText);
 
-    if (enteredChar === currentWord[matchCount]) {
-      setMatchCount(matchCount + 1);
-      setInputValue("");
+
+    if (enteredText === currentWord.substring(0, enteredText.length)) {
+      setMatchCount(enteredText.length);
+      setTotalMatchCount(totalMatchCount + 1);
     }
   };
 
@@ -44,7 +45,7 @@ const GameComponent = ({ playerName }) => {
     <div className="game-div">
       <h1 className="good-luck">Lykke til, {playerName}!</h1>
       <CountdownComponent />
-      <PointComponent matchCount={matchCount} />
+      <PointComponent totalMatchCount={totalMatchCount} />
       <InputField value={inputValue} onChange={handleInputChange} />
       <div>
         <p>{currentWord}</p>
