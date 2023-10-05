@@ -12,6 +12,8 @@ const GameComponent = ({ playerName }) => {
   const [matchCount, setMatchCount] = useState(0);
   const [totalMatchCount, setTotalMatchCount] = useState(0);
 
+
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {

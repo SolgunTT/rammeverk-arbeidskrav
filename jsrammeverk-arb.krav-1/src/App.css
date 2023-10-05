@@ -2,22 +2,19 @@ body {
     background-color: rgb(204, 155, 129);
 }
 
-.highscore-button {
-
-    margin-top: 2000vh;
-    background-color: rgb(34, 245, 11);
-}
 
 
 .shared-button {
 
 padding: 1vw;
 background-color: rgb(181, 244, 248);
-border-radius: 1vw;
+border-radius: 4px;
 border-style: none;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 font-weight:bolder;
-color: dimgray;
+color: black;
+width: 7vw;
+height: 4vh;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
 }

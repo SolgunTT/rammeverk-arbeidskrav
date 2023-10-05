@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Button from "./Button";
+import "../App.css";
 
 
 const CountdownComponent = ({ userInput }) => {
@@ -23,7 +25,10 @@ const CountdownComponent = ({ userInput }) => {
   return (
     <div className="game-div">
       {belowZero ? (
+        <>
         <p>Time's up!</p>
+        <Button value="Se Highscore" />
+        </>
       ) : (
         <div className="game-div">
           <p>Countdown: {countdown}</p>
