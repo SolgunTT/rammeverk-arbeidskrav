@@ -43,6 +43,7 @@ const GameComponent = ({ playerName }) => {
     }
   };
 
+
   return (
     <div className="game-div">
       <h1 className="good-luck">Lykke til, {playerName}!</h1>
