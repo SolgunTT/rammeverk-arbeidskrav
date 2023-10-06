@@ -12,6 +12,9 @@ const GameComponent = ({ playerName }) => {
   const [inputValue, setInputValue] = useState("");
   const [matchCount, setMatchCount] = useState(0);
   const [totalMatchCount, setTotalMatchCount] = useState(0);
+  const [consecutiveCorrect, setConsecutiveCorrect] = useState(0); 
+
+
 
 
 
@@ -20,9 +23,21 @@ const GameComponent = ({ playerName }) => {
       if (e.key === " ") {
         e.preventDefault();
         if (wordIndex < words.length) {
+          if (inputValue === currentWord) {
+            setTotalMatchCount(totalMatchCount + 50); // Add 50 points for a correct word
+            if (consecutiveCorrect === 2) {
+              // If it's the third consecutive correct word, add 100 extra points
+              setTotalMatchCount(totalMatchCount + 100);
+              setConsecutiveCorrect(0); // Reset the counter
+            } else {
+              setConsecutiveCorrect(consecutiveCorrect + 1);
+            }
+          } else {
+            setConsecutiveCorrect(0); // Reset the counter if the word is incorrect
+          }
           setWordIndex(wordIndex + 1);
+          setInputValue(""); // Clear the input field
         }
-        setInputValue("");
       }
     };
 
@@ -31,7 +46,8 @@ const GameComponent = ({ playerName }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [wordIndex, words]);
+  }, [wordIndex, words, currentWord, inputValue, totalMatchCount, consecutiveCorrect]);
+
 
  
 
@@ -39,8 +55,8 @@ const GameComponent = ({ playerName }) => {
     const enteredText = e.target.value;
     setInputValue(enteredText);
   
-console.log(enteredText);
-console.log(enteredText.length - 1);
+    console.log(enteredText.length);
+
 // Comparing the last letter in both variables
     if (enteredText[enteredText.length - 1] === currentWord[enteredText.length - 1]) {
       setMatchCount(enteredText.length);
