@@ -32,16 +32,24 @@ const GameComponent = ({ playerName }) => {
     };
   }, [wordIndex, words]);
 
+ 
+
   const handleInputChange = (e) => {
     const enteredText = e.target.value;
     setInputValue(enteredText);
-
-
+  
     if (enteredText === currentWord.substring(0, enteredText.length)) {
       setMatchCount(enteredText.length);
-      setTotalMatchCount(totalMatchCount + 1);
+      setTotalMatchCount(totalMatchCount + 1)
+    } else {
+      setMatchCount(0); // Reset matchCount if the entered text doesn't match
+      setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
     }
   };
+
+  // const [prevInputValue, setPrevInputValue] = useState
+  
+  
 
 
   return (
