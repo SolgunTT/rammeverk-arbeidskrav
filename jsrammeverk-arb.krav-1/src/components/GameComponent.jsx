@@ -4,6 +4,7 @@ import CountdownComponent from "./CountdownComponent";
 import InputField from "./InputField";
 import PointComponent from "./PointComponent";
 
+
 const GameComponent = ({ playerName }) => {
   const [wordIndex, setWordIndex] = useState(0);
   const words = Høst.ord;
@@ -38,16 +39,20 @@ const GameComponent = ({ playerName }) => {
     const enteredText = e.target.value;
     setInputValue(enteredText);
   
-    if (enteredText === currentWord.substring(0, enteredText.length)) {
+console.log(enteredText);
+console.log(enteredText.length - 1);
+// Comparing the last letter in both variables
+    if (enteredText[enteredText.length - 1] === currentWord[enteredText.length - 1]) {
       setMatchCount(enteredText.length);
       setTotalMatchCount(totalMatchCount + 1)
     } else {
       setMatchCount(0); // Reset matchCount if the entered text doesn't match
       setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
     }
+
+    
   };
 
-  // const [prevInputValue, setPrevInputValue] = useState
   
   
 

@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "./Button";
 
-const HighscoreComponent = () => {
+const HighscoreComponent = ({ playerName }) => {
+  return (
     <>
-<Button />
-<p>"ssefds"</p>
-</>
-
-}
-
+      <Button />
+      <p>{playerName}</p>
+    </>
+  );
+};
 
 export default HighscoreComponent;
