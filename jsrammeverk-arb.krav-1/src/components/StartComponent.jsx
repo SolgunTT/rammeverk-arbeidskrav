@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import StartButton from "./StartButton";
 import InputField from "./InputField";
+import GameComponent from "./GameComponent";
 
-const StartComponent = ({ onGameStart }) => {
+const StartComponent = () => {
   const [name, setName] = useState("");
   const [displayedName, setDisplayedName] = useState("");
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
   const handleInputChange = (event) => {
     setName(event.target.value);
@@ -13,14 +15,20 @@ const StartComponent = ({ onGameStart }) => {
   const handleButtonClick = () => {
     setDisplayedName(name);
     setName("");
-    onGameStart(); // Call the callback function to start the game
+    setIsGameStarted(true);
   };
 
   return (
-    <div className="start-component">
-      <InputField value={name} onChange={handleInputChange} />
-      <StartButton onClick={handleButtonClick} />
-      <p>{displayedName}</p>
+    <div>
+      {isGameStarted ? (
+        <GameComponent playerName={displayedName} />
+      ) : (
+        <div className="start-component">
+          <InputField value={name} onChange={handleInputChange} />
+          <StartButton onClick={handleButtonClick} />
+          <p>{displayedName}</p>
+        </div>
+      )}
     </div>
   );
 };
