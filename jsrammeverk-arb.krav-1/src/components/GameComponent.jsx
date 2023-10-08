@@ -11,7 +11,7 @@ const GameComponent = ({ playerName }) => {
   const [inputValue, setInputValue] = useState("");
   const [totalMatchCount, setTotalMatchCount] = useState(0);
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
-  const [minusMatchCount, setMinusMatchCount] = useState(0);
+  const [currentWordMinusMatchCount, setCurrentWordMinusMatchCount] = useState(0);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -27,23 +27,26 @@ const GameComponent = ({ playerName }) => {
             setConsecutiveCorrect(consecutiveCorrect + 1);
           }
         } else {
+          // Check if minus points for the current word exceed 5, if not, deduct a point
+          if (currentWordMinusMatchCount < 5) {
+            setCurrentWordMinusMatchCount(currentWordMinusMatchCount + 1);
+            setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
+          }
           setConsecutiveCorrect(0); // Reset the counter if the word is incorrect
         }
         // Advance to the next word or loop back to the first
         setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
         setInputValue(""); // Clear the input field
+        setCurrentWordMinusMatchCount(0); // Reset minus points for the new word
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyDown);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentWord, inputValue, totalMatchCount, consecutiveCorrect]);
-  
-  
-  
+  }, [inputValue, currentWord, consecutiveCorrect, currentWordMinusMatchCount, totalMatchCount, words.length]);
 
   const handleInputChange = (e) => {
     const enteredText = e.target.value;
@@ -54,19 +57,15 @@ const GameComponent = ({ playerName }) => {
       enteredText[enteredText.length - 1] ===
       currentWord[enteredText.length - 1]
     ) {
-// If congruent, then add a point
+      // If congruent, then add a point
       setTotalMatchCount(totalMatchCount + 1);
     } else {
       // If non-congruent, subtract a point
-      setMinusMatchCount((prevCount) => prevCount + 1);
-// If more than 5 points are subtracted, then...
-      if (minusMatchCount >= 5) {
-        // Don't add - 1 to setTotalMatchCount
-      } else {
+      if (currentWordMinusMatchCount < 5) {
+        setCurrentWordMinusMatchCount(currentWordMinusMatchCount + 1);
         setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
       }
     }
-    
   };
 
   return (
