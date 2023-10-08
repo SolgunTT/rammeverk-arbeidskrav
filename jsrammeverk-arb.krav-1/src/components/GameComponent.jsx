@@ -37,7 +37,6 @@ const GameComponent = ({ playerName }) => {
         // Advance to the next word or loop back to the first
         setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
         setInputValue(""); // Clear the input field
-        setCurrentWordMinusMatchCount(0); // Reset minus points for the new word
       }
     };
 
