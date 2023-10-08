@@ -11,7 +11,9 @@ const GameComponent = ({ playerName }) => {
   const [inputValue, setInputValue] = useState("");
   const [totalMatchCount, setTotalMatchCount] = useState(0);
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
-  const [currentWordMinusMatchCount, setCurrentWordMinusMatchCount] = useState(0);
+  const [minusMatchCount, setMinusMatchCount] = useState(0);
+
+  // 5 minuspoeng funker ikke
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -27,11 +29,6 @@ const GameComponent = ({ playerName }) => {
             setConsecutiveCorrect(consecutiveCorrect + 1);
           }
         } else {
-          // Check if minus points for the current word exceed 5, if not, deduct a point
-          if (currentWordMinusMatchCount < 5) {
-            setCurrentWordMinusMatchCount(currentWordMinusMatchCount + 1);
-            setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
-          }
           setConsecutiveCorrect(0); // Reset the counter if the word is incorrect
         }
         // Advance to the next word or loop back to the first
@@ -39,18 +36,21 @@ const GameComponent = ({ playerName }) => {
         setInputValue(""); // Clear the input field
       }
     };
-
+  
     document.addEventListener("keydown", handleKeyDown);
-
+  
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [inputValue, currentWord, consecutiveCorrect, currentWordMinusMatchCount, totalMatchCount, words.length]);
+  }, [currentWord, inputValue, totalMatchCount, consecutiveCorrect, words.length]);
+  
+  
+  
 
   const handleInputChange = (e) => {
     const enteredText = e.target.value;
     setInputValue(enteredText);
-
+  
     // Comparing the last letter in both variables
     if (
       enteredText[enteredText.length - 1] ===
@@ -59,13 +59,20 @@ const GameComponent = ({ playerName }) => {
       // If congruent, then add a point
       setTotalMatchCount(totalMatchCount + 1);
     } else {
-      // If non-congruent, subtract a point
-      if (currentWordMinusMatchCount < 5) {
-        setCurrentWordMinusMatchCount(currentWordMinusMatchCount + 1);
+      // If non-congruent, subtract a point with a maximum of -5
+      if (minusMatchCount < 5) {
         setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
+        setMinusMatchCount((prevCount) => prevCount + 1);
       }
     }
   };
+  
+  // Add a useEffect to reset minusMatchCount when the word changes
+  useEffect(() => {
+    setMinusMatchCount(0);
+  }, [currentWord]);
+  
+  
 
   return (
     <div className="game-div">
@@ -81,3 +88,4 @@ const GameComponent = ({ playerName }) => {
 };
 
 export default GameComponent;
+
