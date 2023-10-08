@@ -88,4 +88,3 @@ const GameComponent = ({ playerName }) => {
 };
 
 export default GameComponent;
-

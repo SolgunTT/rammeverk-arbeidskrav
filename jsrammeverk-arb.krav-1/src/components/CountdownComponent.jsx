@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import "../App.css";
-
+import HighscoreButton from "./HighscoreButton";
+import HighscoreComponent from "./HighscoreComponent"; // Import HighscoreComponent
 
 const CountdownComponent = ({ userInput }) => {
-  const [countdown, setCountdown] = useState(120);
+  const [countdown, setCountdown] = useState(1);
   const [belowZero, setBelowZero] = useState(false);
+  const [seehighS, setseehighS] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -22,12 +24,21 @@ const CountdownComponent = ({ userInput }) => {
     };
   }, [countdown]);
 
+  const seeHighScore = () => {
+    setseehighS(true);
+    console.log("lkd")
+  };
+
   return (
     <div className="game-div">
       {belowZero ? (
         <>
-        <p>Time's up!</p>
-        <Button value="Se Highscore" />
+          <p></p>
+          {seehighS ? (
+            <HighscoreComponent playerName={userInput} /> // Show HighscoreComponent when seehighS is true
+          ) : (
+            <HighscoreButton seeHighScore={seeHighScore} />
+          )}
         </>
       ) : (
         <div className="game-div">
