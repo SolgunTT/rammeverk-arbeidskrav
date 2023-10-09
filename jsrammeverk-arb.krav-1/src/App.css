@@ -1,5 +1,11 @@
 body {
-    background-color: rgb(204, 155, 129);
+    background-color: rgb(192, 184, 174);
+background-image: url(../src/oliver-hihn-Fd3NFkSLkzs-unsplash.jpg);
+background-size: cover;
+/* background-repeat: no-repeat; */
+width: 300px;
+height: 200px;
+padding: 10vw;
 }
 
 
@@ -7,13 +13,13 @@ body {
 .shared-button {
 
 padding: 1vw;
-background-color: rgb(181, 244, 248);
+background-color: rgb(214, 163, 77);
 border-radius: 4px;
 border-style: none;
 font-family: Verdana, Geneva, Tahoma, sans-serif;
 font-weight:bolder;
 color: black;
-width: 7vw;
+width: 13vw;
 height: 4vh;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
@@ -24,8 +30,17 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
 
     display: flex;
     justify-content: space-around;
-    margin-top: 5vh;
+    margin-top: 15vh;
+    margin-left: 20vw;
 }
+
+input {
+    margin-right: 10vw;
+    width: 20vw;
+    height: 3vh;
+    font-size: 2vw;
+}
+
 
 
 .good-luck {
@@ -47,13 +62,16 @@ width: 30vw;
 
 .highscore-div {
 
-    width: 50vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 30px;
+padding: 1vw;
+    width: 30vw;
     height: 30vh;
-    background-color: azure;
+    background-color: rgb(182, 219, 219);
 }
 
 .highscore-div ul {
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     list-style-type: none;
 }

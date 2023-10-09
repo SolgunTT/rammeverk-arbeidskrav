@@ -1,41 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 
-
-const CountdownComponent = ({setCountdownComplete }) => {
-  const [countdown, setCountdown] = useState(7);
+const CountdownComponent = ({ setCountdownComplete }) => {
+  const [countdown, setCountdown] = useState(12);
   const [belowZero, setBelowZero] = useState(false);
 
-
   useEffect(() => {
+    // Interval to decrement the countdown
     const intervalId = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
 
       if (countdown <= 0) {
         clearInterval(intervalId);
         setBelowZero(true);
-        // Notify the parent component that countdown is complete
         setCountdownComplete(true);
       }
     }, 1000);
 
     return () => {
-      clearInterval(intervalId);
+      clearInterval(intervalId); // Cleanup interval
     };
   }, [countdown, setCountdownComplete]);
 
- 
-
-  // Countdown number disappears when below zero
   return (
     <div className="game-div">
       {belowZero ? (
         <>
-          <p></p>
+          <p></p> {/* Empty when countdown is expired */}
         </>
       ) : (
         <div className="game-div">
-          <p>Countdown: {countdown}</p>
+          <p>Countdown: {countdown}</p> {/* Display countdown */}
         </div>
       )}
     </div>

@@ -5,12 +5,8 @@ import InputField from "./InputField";
 import PointComponent from "./PointComponent";
 import HighscoreButton from "./HighscoreButton";
 import HighscoreComponent from "./HighscoreComponent";
-
-// Define storeHighScore as a separate utility function
-function storeHighScore(playerName, finalScore) {
-  // Implement logic to store the high score (e.g., in local storage or a database)
-  // ...
-}
+import { storeHighScore } from "../localStorageUtils";
+import "../App.css";
 
 const GameComponent = ({
   playerName,
@@ -23,19 +19,22 @@ const GameComponent = ({
   const [inputValue, setInputValue] = useState("");
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [minusMatchCount, setMinusMatchCount] = useState(0);
-  const [countdownComplete, setCountdownComplete] = useState(false); // Countdown completion state
+  const [countdownComplete, setCountdownComplete] = useState(false);
   const [seehighS, setseehighS] = useState(false);
 
   useEffect(() => {
+    // Event listener for keydown events
     const handleKeyDown = (e) => {
       if (e.key === " ") {
         e.preventDefault();
         if (inputValue === currentWord) {
+          // Add points for correct word
           const finalTotalMatchCount = totalMatchCount + 50;
-          onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
+          onTotalMatchCountChange(finalTotalMatchCount);
           if (consecutiveCorrect === 2) {
+            // Add bonus points for third consecutive correct word
             const extraPoints = finalTotalMatchCount + 100;
-            onTotalMatchCountChange(extraPoints); // Notify App of the change
+            onTotalMatchCountChange(extraPoints);
             setConsecutiveCorrect(0);
           } else {
             setConsecutiveCorrect(consecutiveCorrect + 1);
@@ -48,8 +47,10 @@ const GameComponent = ({
       }
     };
 
+    // Add event listener for keydown
     document.addEventListener("keydown", handleKeyDown);
 
+    // Remove event listener when component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -59,7 +60,7 @@ const GameComponent = ({
     totalMatchCount,
     consecutiveCorrect,
     words.length,
-    onTotalMatchCountChange, // Add onTotalMatchCountChange to dependencies
+    onTotalMatchCountChange,
   ]);
 
   const handleInputChange = (e) => {
@@ -70,39 +71,36 @@ const GameComponent = ({
       enteredText[enteredText.length - 1] ===
       currentWord[enteredText.length - 1]
     ) {
+      // Add points for correct character input
       const finalTotalMatchCount = totalMatchCount + 1;
-      onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
+      onTotalMatchCountChange(finalTotalMatchCount);
     } else {
-      if (minusMatchCount < 5 ) {
+      if (minusMatchCount < 5) {
+        // Deduct points for incorrect character input (up to 5 times)
         const finalTotalMatchCount = totalMatchCount - 1;
-        onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
+        onTotalMatchCountChange(finalTotalMatchCount);
         setMinusMatchCount((prevCount) => prevCount + 1);
       }
     }
   };
 
   useEffect(() => {
+    // Reset the count of incorrect character inputs
     setMinusMatchCount(0);
   }, [currentWord]);
 
   useEffect(() => {
-    console.log("countdownComplete:", countdownComplete);
-  }, [countdownComplete]);
+    // Calculate the player's final score and store the high score when the game ends
+    const finalScore = totalMatchCount;
+    if (countdownComplete && finalScore !== 0) {
+      storeHighScore(playerName, finalScore);
+    }
+  }, [countdownComplete, playerName, totalMatchCount]);
 
   const seeHighScore = () => {
+    // Display high scores when the HighscoreButton is clicked
     setseehighS(true);
   };
-
-  useEffect(() => {
-    // Calculate the player's final score if needed
-    const finalScore = totalMatchCount; // Modify this logic as needed
-
-    // Call the utility function to store the high score
-    storeHighScore(playerName, finalScore);
-
-    // Reset the game or perform any other actions needed
-    // You can also navigate to a different screen or component here
-  }, [seehighS, playerName, totalMatchCount]);
 
   return (
     <div className="game-div">
@@ -112,9 +110,9 @@ const GameComponent = ({
             totalMatchCount={totalMatchCount}
             onTotalMatchCountChange={onTotalMatchCountChange}
             playerName={playerName}
-          /> // Show HighscoreComponent when seehighS is true
+          />
         ) : (
-          <HighscoreButton seeHighScore={seeHighScore} /> // Show HighscoreButton when seehighS is false
+          <HighscoreButton seeHighScore={seeHighScore} />
         )
       ) : (
         <>

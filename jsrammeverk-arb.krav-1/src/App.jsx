@@ -16,7 +16,6 @@ function App() {
   const handleTotalMatchCountChange = (newTotalMatchCount) => {
     setTotalMatchCount(newTotalMatchCount); // Update the totalMatchCount state
     console.log("Total Match Count changed too:", newTotalMatchCount);
-
   };
 
   return (

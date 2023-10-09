@@ -6,6 +6,7 @@ const HIGH_SCORES_KEY = "highScores";
 // Function to get high scores from local storage
 export const getHighScores = () => {
   const highScoresJSON = localStorage.getItem(HIGH_SCORES_KEY);
+  // console.log(highScoresJSON)
   return highScoresJSON ? JSON.parse(highScoresJSON) : [];
 };
 
@@ -15,4 +16,5 @@ export const storeHighScore = (playerName, score) => {
   highScores.push({ playerName, score });
   highScores.sort((a, b) => b.score - a.score); // Sort in descending order
   localStorage.setItem(HIGH_SCORES_KEY, JSON.stringify(highScores));
+  console.log(highScores);
 };

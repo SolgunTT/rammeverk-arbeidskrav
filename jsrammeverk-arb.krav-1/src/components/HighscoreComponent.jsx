@@ -1,9 +1,9 @@
 import React from "react";
 import { getHighScores } from "../localStorageUtils"; // Import the utility function
 
-
 const HighscoreComponent = () => {
   const highScores = getHighScores();
+
 
   return (
     <div className="highscore-div">
@@ -15,7 +15,6 @@ const HighscoreComponent = () => {
           </li>
         ))}
       </ul>
-      {/* Add a button or interface to clear high scores if needed */}
     </div>
   );
 };
