@@ -73,7 +73,7 @@ const GameComponent = ({
       const finalTotalMatchCount = totalMatchCount + 1;
       onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
     } else {
-      if (minusMatchCount < 5) {
+      if (minusMatchCount < 5 ) {
         const finalTotalMatchCount = totalMatchCount - 1;
         onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
         setMinusMatchCount((prevCount) => prevCount + 1);
