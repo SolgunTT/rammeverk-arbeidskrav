@@ -93,7 +93,7 @@ const GameComponent = ({
     setseehighS(true);
   };
 
-  const handleGameEnd = () => {
+  useEffect(() => {
     // Calculate the player's final score if needed
     const finalScore = totalMatchCount; // Modify this logic as needed
 
@@ -102,7 +102,7 @@ const GameComponent = ({
 
     // Reset the game or perform any other actions needed
     // You can also navigate to a different screen or component here
-  };
+  }, [seehighS, playerName, totalMatchCount]);
 
   return (
     <div className="game-div">
@@ -130,9 +130,6 @@ const GameComponent = ({
 
           <p>{currentWord}</p>
         </>
-      )}
-      {countdownComplete && !seehighS && (
-        <button onClick={handleGameEnd}>End Game</button>
       )}
     </div>
   );
