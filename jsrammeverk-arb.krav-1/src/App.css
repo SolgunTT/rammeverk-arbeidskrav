@@ -43,3 +43,17 @@ width: 30vw;
 .points {
     font-size: 6vh;
 }
+
+
+.highscore-div {
+
+    width: 50vw;
+    height: 30vh;
+    background-color: azure;
+}
+
+.highscore-div ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}

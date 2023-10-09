@@ -6,6 +6,12 @@ import PointComponent from "./PointComponent";
 import HighscoreButton from "./HighscoreButton";
 import HighscoreComponent from "./HighscoreComponent";
 
+// Define storeHighScore as a separate utility function
+function storeHighScore(playerName, finalScore) {
+  // Implement logic to store the high score (e.g., in local storage or a database)
+  // ...
+}
+
 const GameComponent = ({
   playerName,
   totalMatchCount,
@@ -87,13 +93,25 @@ const GameComponent = ({
     setseehighS(true);
   };
 
+  const handleGameEnd = () => {
+    // Calculate the player's final score if needed
+    const finalScore = totalMatchCount; // Modify this logic as needed
+
+    // Call the utility function to store the high score
+    storeHighScore(playerName, finalScore);
+
+    // Reset the game or perform any other actions needed
+    // You can also navigate to a different screen or component here
+  };
+
   return (
     <div className="game-div">
       {countdownComplete ? (
-        seehighS ? ( // Check if seehighS is true
+        seehighS ? (
           <HighscoreComponent
             totalMatchCount={totalMatchCount}
             onTotalMatchCountChange={onTotalMatchCountChange}
+            playerName={playerName}
           /> // Show HighscoreComponent when seehighS is true
         ) : (
           <HighscoreButton seeHighScore={seeHighScore} /> // Show HighscoreButton when seehighS is false
@@ -112,6 +130,9 @@ const GameComponent = ({
 
           <p>{currentWord}</p>
         </>
+      )}
+      {countdownComplete && !seehighS && (
+        <button onClick={handleGameEnd}>End Game</button>
       )}
     </div>
   );

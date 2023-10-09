@@ -3,7 +3,7 @@ import "../App.css";
 
 
 const CountdownComponent = ({setCountdownComplete }) => {
-  const [countdown, setCountdown] = useState(12);
+  const [countdown, setCountdown] = useState(4);
   const [belowZero, setBelowZero] = useState(false);
 
 
