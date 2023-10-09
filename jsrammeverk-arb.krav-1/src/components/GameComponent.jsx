@@ -6,7 +6,11 @@ import PointComponent from "./PointComponent";
 import HighscoreButton from "./HighscoreButton";
 import HighscoreComponent from "./HighscoreComponent";
 
-const GameComponent = ({ playerName, totalMatchCount, onTotalMatchCountChange }) => {
+const GameComponent = ({
+  playerName,
+  totalMatchCount,
+  onTotalMatchCountChange,
+}) => {
   const [wordIndex, setWordIndex] = useState(0);
   const words = Høst.ord;
   const currentWord = words[wordIndex];
@@ -43,7 +47,6 @@ const GameComponent = ({ playerName, totalMatchCount, onTotalMatchCountChange })
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-    setseehighS(false); 
   }, [
     currentWord,
     inputValue,
@@ -80,7 +83,6 @@ const GameComponent = ({ playerName, totalMatchCount, onTotalMatchCountChange })
     console.log("countdownComplete:", countdownComplete);
   }, [countdownComplete]);
 
-
   const seeHighScore = () => {
     setseehighS(true);
   };
@@ -89,29 +91,30 @@ const GameComponent = ({ playerName, totalMatchCount, onTotalMatchCountChange })
     <div className="game-div">
       {countdownComplete ? (
         seehighS ? ( // Check if seehighS is true
-          <HighscoreComponent /> // Show HighscoreComponent when seehighS is true
+          <HighscoreComponent
+            totalMatchCount={totalMatchCount}
+            onTotalMatchCountChange={onTotalMatchCountChange}
+          /> // Show HighscoreComponent when seehighS is true
         ) : (
           <HighscoreButton seeHighScore={seeHighScore} /> // Show HighscoreButton when seehighS is false
         )
       ) : (
         <>
           <h1 className="good-luck">Lykke til, {playerName}!</h1>
-  
+
           <CountdownComponent
-            countdownComplete={countdownComplete}
             setCountdownComplete={setCountdownComplete}
             userInput={playerName}
           />
-  
+
           <PointComponent totalMatchCount={totalMatchCount} />
           <InputField value={inputValue} onChange={handleInputChange} />
-  
+
           <p>{currentWord}</p>
         </>
       )}
     </div>
   );
-  
 };
 
 export default GameComponent;

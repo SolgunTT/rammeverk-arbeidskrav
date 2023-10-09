@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
 import "../App.css";
-import HighscoreButton from "./HighscoreButton";
-import HighscoreComponent from "./HighscoreComponent"; // Import HighscoreComponent
 
-const CountdownComponent = ({ countdownComplete, setCountdownComplete, userInput }) => {
-  const [countdown, setCountdown] = useState(1);
+
+const CountdownComponent = ({setCountdownComplete }) => {
+  const [countdown, setCountdown] = useState(12);
   const [belowZero, setBelowZero] = useState(false);
-  const [seehighS, setseehighS] = useState(false);
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {

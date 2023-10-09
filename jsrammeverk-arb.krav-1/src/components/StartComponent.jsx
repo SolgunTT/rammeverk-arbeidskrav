@@ -3,7 +3,7 @@ import StartButton from "./StartButton";
 import InputField from "./InputField";
 import GameComponent from "./GameComponent";
 
-const StartComponent = ({ onNameChange }) => { // Receive onNameChange as a prop
+const StartComponent = ({ onNameChange, totalMatchCount, onTotalMatchCountChange }) => { // Receive onNameChange as a prop
   const [name, setName] = useState("");
   const [displayedName, setDisplayedName] = useState("");
   const [isGameStarted, setIsGameStarted] = useState(false);
@@ -22,7 +22,8 @@ const StartComponent = ({ onNameChange }) => { // Receive onNameChange as a prop
   return (
     <div>
       {isGameStarted ? (
-        <GameComponent playerName={displayedName} />
+        <GameComponent playerName={displayedName} totalMatchCount={totalMatchCount}
+        onTotalMatchCountChange={onTotalMatchCountChange}/>
       ) : (
         <div className="start-component">
           <InputField value={name} onChange={handleInputChange} />
