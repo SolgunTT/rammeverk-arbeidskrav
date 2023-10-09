@@ -4,7 +4,7 @@ import "../App.css";
 import HighscoreButton from "./HighscoreButton";
 import HighscoreComponent from "./HighscoreComponent"; // Import HighscoreComponent
 
-const CountdownComponent = ({ userInput }) => {
+const CountdownComponent = ({ countdownComplete, setCountdownComplete, userInput }) => {
   const [countdown, setCountdown] = useState(1);
   const [belowZero, setBelowZero] = useState(false);
   const [seehighS, setseehighS] = useState(false);
@@ -16,29 +16,24 @@ const CountdownComponent = ({ userInput }) => {
       if (countdown <= 0) {
         clearInterval(intervalId);
         setBelowZero(true);
+        // Notify the parent component that countdown is complete
+        setCountdownComplete(true);
       }
     }, 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [countdown]);
+  }, [countdown, setCountdownComplete]);
 
-  const seeHighScore = () => {
-    setseehighS(true);
-    console.log("lkd")
-  };
+ 
 
+  // Countdown number disappears when below zero
   return (
     <div className="game-div">
       {belowZero ? (
         <>
           <p></p>
-          {seehighS ? (
-            <HighscoreComponent playerName={userInput} /> // Show HighscoreComponent when seehighS is true
-          ) : (
-            <HighscoreButton seeHighScore={seeHighScore} />
-          )}
         </>
       ) : (
         <div className="game-div">

@@ -3,88 +3,115 @@ import Høst from "../Høst.json";
 import CountdownComponent from "./CountdownComponent";
 import InputField from "./InputField";
 import PointComponent from "./PointComponent";
+import HighscoreButton from "./HighscoreButton";
+import HighscoreComponent from "./HighscoreComponent";
 
-const GameComponent = ({ playerName }) => {
+const GameComponent = ({ playerName, totalMatchCount, onTotalMatchCountChange }) => {
   const [wordIndex, setWordIndex] = useState(0);
   const words = Høst.ord;
   const currentWord = words[wordIndex];
   const [inputValue, setInputValue] = useState("");
-  const [totalMatchCount, setTotalMatchCount] = useState(0);
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [minusMatchCount, setMinusMatchCount] = useState(0);
-
-  // 5 minuspoeng funker ikke
+  const [countdownComplete, setCountdownComplete] = useState(false); // Countdown completion state
+  const [seehighS, setseehighS] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === " ") {
         e.preventDefault();
         if (inputValue === currentWord) {
-          setTotalMatchCount(totalMatchCount + 50); // Add 50 points for a correct word
+          const finalTotalMatchCount = totalMatchCount + 50;
+          onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
           if (consecutiveCorrect === 2) {
-            // If it's the third consecutive correct word, add 100 extra points
-            setTotalMatchCount(totalMatchCount + 100);
-            setConsecutiveCorrect(0); // Reset the counter
+            const extraPoints = finalTotalMatchCount + 100;
+            onTotalMatchCountChange(extraPoints); // Notify App of the change
+            setConsecutiveCorrect(0);
           } else {
             setConsecutiveCorrect(consecutiveCorrect + 1);
           }
         } else {
-          setConsecutiveCorrect(0); // Reset the counter if the word is incorrect
+          setConsecutiveCorrect(0);
         }
-        // Advance to the next word or loop back to the first
         setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-        setInputValue(""); // Clear the input field
+        setInputValue("");
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyDown);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentWord, inputValue, totalMatchCount, consecutiveCorrect, words.length]);
-  
-  
-  
+    setseehighS(false); 
+  }, [
+    currentWord,
+    inputValue,
+    totalMatchCount,
+    consecutiveCorrect,
+    words.length,
+    onTotalMatchCountChange, // Add onTotalMatchCountChange to dependencies
+  ]);
 
   const handleInputChange = (e) => {
     const enteredText = e.target.value;
     setInputValue(enteredText);
-  
-    // Comparing the last letter in both variables
+
     if (
       enteredText[enteredText.length - 1] ===
       currentWord[enteredText.length - 1]
     ) {
-      // If congruent, then add a point
-      setTotalMatchCount(totalMatchCount + 1);
+      const finalTotalMatchCount = totalMatchCount + 1;
+      onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
     } else {
-      // If non-congruent, subtract a point with a maximum of -5
       if (minusMatchCount < 5) {
-        setTotalMatchCount(totalMatchCount - 1); // Deduct a point for each wrong letter
+        const finalTotalMatchCount = totalMatchCount - 1;
+        onTotalMatchCountChange(finalTotalMatchCount); // Notify App of the change
         setMinusMatchCount((prevCount) => prevCount + 1);
       }
     }
   };
-  
-  // Add a useEffect to reset minusMatchCount when the word changes
+
   useEffect(() => {
     setMinusMatchCount(0);
   }, [currentWord]);
-  
-  
+
+  useEffect(() => {
+    console.log("countdownComplete:", countdownComplete);
+  }, [countdownComplete]);
+
+
+  const seeHighScore = () => {
+    setseehighS(true);
+  };
 
   return (
     <div className="game-div">
-      <h1 className="good-luck">Lykke til, {playerName}!</h1>
-      <CountdownComponent />
-      <PointComponent totalMatchCount={totalMatchCount} />
-      <InputField value={inputValue} onChange={handleInputChange} />
-      <div>
-        <p>{currentWord}</p>
-      </div>
+      {countdownComplete ? (
+        seehighS ? ( // Check if seehighS is true
+          <HighscoreComponent /> // Show HighscoreComponent when seehighS is true
+        ) : (
+          <HighscoreButton seeHighScore={seeHighScore} /> // Show HighscoreButton when seehighS is false
+        )
+      ) : (
+        <>
+          <h1 className="good-luck">Lykke til, {playerName}!</h1>
+  
+          <CountdownComponent
+            countdownComplete={countdownComplete}
+            setCountdownComplete={setCountdownComplete}
+            userInput={playerName}
+          />
+  
+          <PointComponent totalMatchCount={totalMatchCount} />
+          <InputField value={inputValue} onChange={handleInputChange} />
+  
+          <p>{currentWord}</p>
+        </>
+      )}
     </div>
   );
+  
 };
 
 export default GameComponent;
